@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org">
+<head>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+<title>Cadastro de Notas</title>
+</head>
+<body>
+	
+	<!--/*/ <th:block th:include="fragments/header :: menu"></th:block> /*/-->
+
+	<main role="main" class="container">
+		<div class="starter-template">
+			
+			
+
+			<div class="col-md-8 order-md-1">
+				<h1 class="mb-3" th:text="'Cadastro de Notas - ' + ${aluno.nome}"></h1>
+				
+				<div th:if="${not #strings.isEmpty(mensagem)}" th:utext="${mensagem} +'<button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span aria-hidden=&quot;true&quot;>&times;</span></button>'" class="alert alert-primary alert-dismissible fade show" role="alert"></div>
+				
+				<form th:action="@{/alunos/{id}/salvarNotas(id=${aluno.id})}" method="POST" th:object="${aluno}">
+					<input type="hidden" th:field="${aluno.id}"/>
+					<div class="row">
+						<div class="col-md-3 mb-3">
+							<label for="notaUm">Nota 1:</label> <input type="number" 
+							min="0" max="100" th:field="${aluno.notaUm}" class="form-control" />
+						</div>
+					
+					
+					
+						<div class="col-md-3 mb-3">
+							<label for="notaDois">Nota 2:</label> <input type="number" 
+							min="0" max="100" th:field="${aluno.notaDois}" class="form-control" />
+						</div>
+					
+					
+					
+						<div class="col-md-3 mb-3">
+							<label for="notaTres">Nota 3:</label> <input type="number" 
+							min="0" max="100" th:field="${aluno.notaTres}" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3 mb-3">
+							<label for="notaFinal">Nota Final:</label> <input type="number" 
+							min="0" max="100" th:field="${aluno.notaFinal}" class="form-control" />
+						</div>
+					
+					
+					
+						<div class="col-md-3 mb-3">
+							<label for="faltas">Faltas:</label> <input type="number" 
+							min="0" max="100" th:field="${aluno.faltas}" class="form-control" />
+						</div>
+					</div>
+					
+					
+					<hr class="mb-4">
+					<button class="btn btn-primary btn-lg btn-block" type="submit">Salvar</button>
+				</form>
+			</div>
+
+		</div>
+	</main>
+
+	<!--/*/ <th:block th:include="fragments/footerinc :: foot"></th:block> /*/-->
+
+	</body>
+</html>

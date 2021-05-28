@@ -1,0 +1,65 @@
+<!doctype html5>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org">
+<head>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+<script th:inline="javascript">
+    function sendDelete(url) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("DELETE", url, true);
+        xhttp.onload = function () {
+            let responseURL = xhttp.responseURL;
+            console.log("Redirecting to:", responseURL);
+            window.location.replace(responseURL);
+        };
+        xhttp.send();
+    }
+</script>
+<title>Alunota - Relatório</title>
+</head>
+<body>
+	
+	<!--/*/ <th:block th:include="fragments/header :: menu"></th:block> /*/-->
+
+	<main role="main" class="container">
+
+		<div class="starter-template">
+			<h1>Relatório de Alunos</h1>
+			
+			
+			<div th:if="${not #strings.isEmpty(mensagem)}" th:utext="${mensagem} +'<button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span aria-hidden=&quot;true&quot;>&times;</span></button>'" class="alert alert-primary alert-dismissible fade show" role="alert"></div>
+
+			
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th style="text-align: center;">Data de Nascimento</th>
+						<th>Média</th>
+						<th>Final</th>
+						<th>Situação</th>
+		
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="aluno : ${alunos}">
+						
+						<td><a th:text="${aluno.nome}"></a></td>
+						
+						<td th:text="${#dates.format(aluno.dataNasc, 'dd/MM/yyyy')}"
+							style="text-align: center;" />
+						<td><a th:text="${aluno.mediaNotas()}"></a></td>
+						<td><a th:text="${aluno.notaFinal}"></a></td>
+						<td><a th:text="${aluno.getSituacao()}"></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:if="${#lists.isEmpty(alunos)}"> Nenhum Aluno Cadastrado</div>
+			
+		</div>
+	</main>
+	
+	<!--/*/ <th:block th:include="fragments/footerinc :: foot"></th:block> /*/-->
+	
+</body>
+</html>

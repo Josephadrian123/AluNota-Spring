@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt_BR" xmlns:th="www.thymeleaf.org">
+<head>
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+<link th:href="@{/css/signin.css}" rel="stylesheet">
+</head>
+<body class="text-center" style="background-color: #f5f5f5;">
+
+	<form class="form-signin" th:action="@{/login}" method="POST" th:object=${usuario}>
+		<img class="mb-4" th:src="@{images/logo-alunota.png}"
+			alt="" width="200" height="200">
+		<h1 class="h3 mb-3 font-weight-normal">Por favor, autentique-se</h1>
+		
+		<div th:if="${not #strings.isEmpty(mensagem)}" th:utext="${mensagem} +'<button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-label=&quot;Close&quot;><span aria-hidden=&quot;true&quot;>&times;</span></button>'" class="alert alert-danger alert-dismissible fade show" role="alert">
+			
+		</div>
+		
+		<label for="email" class="sr-only">Email</label> 
+		
+		<input type="email" class="form-control" placeholder="Email" required autofocus th:field="*{email}"> 
+		
+		<label for="senha" class="sr-only">Senha</label> 
+		
+		<input type="password" class="form-control" placeholder="Senha" required th:field="*{senha}">
+		
+		<div class="checkbox mb-3">
+			<label> <input type="checkbox" value="lembrar">
+				Lembrar-me
+			</label>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+	</form>
+	
+	<!--/*/ <th:block th:include="fragments/footerinc :: foot"></th:block> /*/-->
+</body>
+</html>
